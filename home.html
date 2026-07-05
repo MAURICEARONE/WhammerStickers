@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>
+  <section class="stickers">
+    <div class="textContent">
+      <h1 class="titulo">WhammerStickers</h1>
+      <p class="subtitulo">Ola User Crie Seus Sticker e Packs De Stickers De Forma Rapida e Facil.</p>
+    </div>
+    <div class="container">
+      <div class="botoes">
+        <button class="btnCreatePack">Criar Packs</button>
+        <button class="stickerBtn">Criar Stickers</button>
+      </div>
+      <div class="packs">
+        <div class="packContent">
+          <input type="text" class="packName" placeholder="Digite O Nome Do Pack">
+          <button class="createPack">Criar</button>
+          <button class="cancelPack">Cancelar</button>
+        </div>
+      </div>
+      <div class="createSticker">
+        <div class="stickerContent">
+          <input type="text" class="stickName" placeholder="Nome do sticker">
+          <input type="text" class="packId" placeholder="Nome do pack">
+          <input type="file" id="stickerFile" hidden>
+          <label for="stickerFile" class="fileBtn">Escolher Imagen</label>
+          <span id="fileName">Nenhum ficheiro</span>
+          <canvas id="canvas"></canvas>
+          <button class="saveBtn">Salvar Sticker</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>

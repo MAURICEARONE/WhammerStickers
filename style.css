@@ -1,0 +1,143 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial , sans-serif;
+}
+
+body{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10%;
+  background: rgb(21,22,21);
+  color:#ffff;
+  gap:2em;
+}
+.stickers{
+  width: 100%;
+  height: auto;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+.titulo{
+  font-weight: bold;
+  font-size: 32px;
+  color: rgb(24,103,103);
+}
+.subtitulo{
+  font-weight: bold;
+  font-size: 16px;
+  color:#534f4f;
+}
+.container{
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  gap: 2em;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0  0  10px rgb(32,32,32);
+  padding: 1em;
+}
+.botoes{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.stickerBtn{
+  background: rgb(133,30,30);
+}
+.btnCreatePack{
+  background: rgb(38,105,63)
+}
+.packs , .createSticker{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.packs button , .botoes button{
+  width: 100%;
+  padding: 1em;
+  border: none;
+  color:#fff;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.cancelPack{
+  background: rgb(133,30,30)
+}
+.createPack{
+  background: rgb(38,105,63);
+}
+.createSticker button{
+  width: 100%;
+  padding: 1em;
+  border: none;
+  background: rgb(133,30,30);
+  color:#fff;
+  border-radius: 10px;
+}
+.packContent{
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  align-items: center;
+  border-radius: 15px;
+  padding: 1em;
+}
+.stickerContent{
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  align-items: center;
+  padding: 1em;
+}
+input{
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
+.hidden{
+  display: none;
+}
+.show{
+  display: flex;
+}
+.fileBtn{
+  width: 100%;
+  padding: 1em;
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+#canvas{
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+}
+.saveBtn{
+  display: none;
+  padding: 1em;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
