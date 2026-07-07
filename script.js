@@ -45,3 +45,39 @@ file.addEventListener("change", (event)=>{
 
   saveStickerBtn.style.display ="flex"
 })
+
+const packBtn = document.querySelector(".createPack")
+const packName = document.querySelector(".packName")
+
+packBtn.addEventListener("click", async()=>{
+  const name = packName.value.trim()
+  if(!name){
+     alert("degite o nome do pack") 
+     return
+  }
+  try {
+    const response = await fetch("http://localhost:3000/packs",{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      } ,
+      body: JSON.stringify({
+        name: name
+      })
+    })
+    const data = await response.json()
+    if(!response.ok){
+      alert(data.error)
+      return
+    }
+    alert("pack criado com sucesso")
+    console.log(data)
+    packName.value = ""
+
+    packContent.classList.remove("show")
+    botoes.classList.remove("hidden")
+  } catch (error) {
+    console.error(error)
+    alert("Erro ao conectar com servidor")
+  }
+})

@@ -1,0 +1,26 @@
+{
+  "users": [],
+  "packs": [
+    {
+      "id": 1783348978207,
+      "name": "Meu Primeiro Pack",
+      "stickers": [
+        {
+          "id": 1783349605381,
+          "name": "mauro 1",
+          "image": "data:image/png;base64,TESTE"
+        }
+      ]
+    },
+    {
+      "id": 1783403014540,
+      "name": "Teste",
+      "stickers": []
+    },
+    {
+      "id": 1783403107951,
+      "name": "Joao",
+      "stickers": []
+    }
+  ]
+}
