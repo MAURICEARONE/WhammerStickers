@@ -81,3 +81,49 @@ packBtn.addEventListener("click", async()=>{
     alert("Erro ao conectar com servidor")
   }
 })
+const stickName = document.querySelector(".stickName")
+const packId = document.querySelector(".packId")
+const saveBtn = document.querySelector(".saveBtn")
+
+saveBtn.addEventListener("click", async ()=>{
+  const name = stickName.value.trim()
+  const pack = packId.value.trim()
+  const image = canvas.toDataURL("image/png")
+
+  if(!name || !pack || !image){
+    alert("Preencha todos campos")
+    return
+  }
+  try {
+    const response = await fetch("http://localhost:3000/stickers",{
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      } ,
+      body: JSON.stringify({
+        name:name ,
+        pack:pack ,
+        image:image
+      })
+    })
+    const data = await response.json()
+    if(!response.ok){
+      alert(data.error)
+      return
+    }
+    alert("Sticker criado com sucesso!")
+    console.log(data)
+    stickName.value =""
+    packId.value = ""
+    file.value = ""
+    fileName.textContent = "Nenhum ficheiro"
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    canvas.width = 0
+    canvas.height = 0
+  } catch (error) {
+    console.error(error)
+    alert("Erro ao conectar com servidor!")
+  }
+})
+
+//acho é tudo por aqui ..

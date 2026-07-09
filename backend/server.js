@@ -3,7 +3,7 @@ const cors = require("cors");
 const db = require("../database/database.js")
 const app = express();
 
-app.use(express.json());
+app.use(express.json({limit: "10mb"}));
 app.use(cors());
 
 app.post("/packs" , (req , res)=>{
