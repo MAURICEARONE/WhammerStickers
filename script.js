@@ -56,7 +56,7 @@ packBtn.addEventListener("click", async()=>{
      return
   }
   try {
-    const response = await fetch("http://localhost:3000/packs",{
+    const response = await fetch("https://whammerstickers.onrender.com/packs",{
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -95,7 +95,7 @@ saveBtn.addEventListener("click", async ()=>{
     return
   }
   try {
-    const response = await fetch("http://localhost:3000/stickers",{
+    const response = await fetch("https://whammerstickers.onrender.com/stickers",{
       method: "POST",
       headers: {
         "Content-Type":"application/json"
