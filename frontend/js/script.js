@@ -95,7 +95,7 @@ saveBtn.addEventListener("click", async ()=>{
     return
   }
   try {
-    const response = await fetch("https://whammerstickers.onrender.com/stickers",{
+    const response = await fetch("http://localhost:3000/stickers",{
       method: "POST",
       headers: {
         "Content-Type":"application/json"
@@ -120,10 +120,80 @@ saveBtn.addEventListener("click", async ()=>{
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     canvas.width = 0
     canvas.height = 0
+    stickerContent.classList.remove("show")
+    botoes.classList.remove("hidden")
   } catch (error) {
     console.error(error)
     alert("Erro ao conectar com servidor!")
   }
 })
 
+const acessarConteudo = document.querySelector(".verPacks").addEventListener("click",()=>{
+  window.location.assign("./frontend/docs/packs.html")
+})
+const inputPack = document.querySelector(".packId");
+const listaPacks = document.querySelector(".listaPacks");
+
+let packs = [];
+let packSelecionado = null;
+
+async function buscarPacks(){
+
+    try{
+
+        const response = await fetch("http://localhost:3000/packs");
+
+        if(!response.ok){
+            throw new Error("Erro ao buscar packs");
+        }
+
+        packs = await response.json();
+
+        listaPacks.innerHTML = "";
+
+        packs.forEach(pack=>{
+
+            const item = document.createElement("div");
+
+            item.textContent = pack.name;
+
+            item.addEventListener("click",()=>{
+
+                inputPack.value = pack.name;
+
+                packSelecionado = pack.id;
+
+                listaPacks.style.display = "none";
+
+            });
+
+            listaPacks.appendChild(item);
+
+        });
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+inputPack.addEventListener("click",()=>{
+
+    listaPacks.style.display = "block";
+
+});
+
+document.addEventListener("click",(e)=>{
+
+    if(!e.target.closest(".input-group")){
+
+        listaPacks.style.display = "none";
+
+    }
+
+});
+
+buscarPacks();
 //acho é tudo por aqui ..

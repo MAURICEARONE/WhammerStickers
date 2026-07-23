@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="frontend/css/style.css">
   <title>Document</title>
 </head>
 <body>
@@ -16,6 +16,7 @@
       <div class="botoes">
         <button class="btnCreatePack">Criar Packs</button>
         <button class="stickerBtn">Criar Stickers</button>
+        <button class="verPacks">Ver seus packs</button>
       </div>
       <div class="packs">
         <div class="packContent">
@@ -27,7 +28,16 @@
       <div class="createSticker">
         <div class="stickerContent">
           <input type="text" class="stickName" placeholder="Nome do sticker">
-          <input type="text" class="packId" placeholder="Nome do pack">
+
+   <div class="input-group">
+      <input
+        type="text"
+        class="packId"
+        placeholder="Escolha um pack"
+        readonly>
+
+    <div class="listaPacks"></div>
+</div>
           <input type="file" id="stickerFile" hidden>
           <label for="stickerFile" class="fileBtn">Escolher Imagen</label>
           <span id="fileName">Nenhum ficheiro</span>
@@ -37,6 +47,6 @@
       </div>
     </div>
   </section>
-  <script src="script.js"></script>
+  <script src="frontend/js/script.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("../database/database.js")
+const db = require("./database/database.js")
 const app = express();
 
 app.use(express.json({limit: "10mb"}));
@@ -31,6 +31,17 @@ app.post("/stickers" , (req , res)=>{
   res.json(sticker)
 })
 
+app.get("/packs", (req , res)=>{
+  const packs = db.getPacks()
+  res.json(packs)
+})
+app.get("/packs/search", (req, res) => {
+  const search = req.query.search;
+
+  const packs = db.searchPacks(search);
+
+  res.json(packs);
+});
 const PORT = process.env.PORT || 3000
 app.listen(PORT , ()=>{
   console.log(`Servidor Rodando em Localhost ${PORT}`)

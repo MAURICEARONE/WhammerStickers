@@ -1,5 +1,5 @@
 const fs = require("fs")
-const dbFile = "../database/database.json"
+const dbFile = "./database/database.json"
 
 const loadDb = ()=>{
   return JSON.parse(fs.readFileSync(dbFile, "utf-8"))
@@ -36,8 +36,21 @@ const createSticker = (name,pack,image)=>{
   saveDb(db)
   return sticker
 }
+const searchPacks = (search)=>{
+  const db = loadDb()
+  return db.packs.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+}
+const getPacks = () => {
+    const db = loadDb();
 
+    return db.packs.map(pack => ({
+        ...pack,
+        quantidade: pack.stickers.length
+    }));
+}
 module.exports = {
   createPack ,
-  createSticker
+  createSticker ,
+  searchPacks ,
+  getPacks
 }
