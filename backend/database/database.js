@@ -48,9 +48,15 @@ const getPacks = () => {
         quantidade: pack.stickers.length
     }));
 }
+const getPackById = (id)=>{
+  const db = loadDb()
+
+  return db.packs.find(pack=>pack.id==id)
+}
 module.exports = {
   createPack ,
   createSticker ,
   searchPacks ,
-  getPacks
+  getPacks,
+  getPackById
 }

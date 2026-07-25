@@ -42,6 +42,16 @@ app.get("/packs/search", (req, res) => {
 
   res.json(packs);
 });
+app.get("/packs/:id", (req , res)=>{
+  const id = req.params.id
+  const pack = db.getPackById(id)
+  if(!pack){
+    return res.status(404).json({
+      error:"pack nao encontrado"
+    })
+  }
+  res.json(pack)
+})
 const PORT = process.env.PORT || 3000
 app.listen(PORT , ()=>{
   console.log(`Servidor Rodando em Localhost ${PORT}`)

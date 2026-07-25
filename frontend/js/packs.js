@@ -33,7 +33,7 @@ async function buscarPacks() {
 
 
           card.addEventListener("click",()=>{
-            alert("Por enquanto nao posso mostrar . estamos em atualizacao")
+            window.location.href = `../docs/stickers.html?id=${pack.id}`
           })
       })
     } catch (error) {
