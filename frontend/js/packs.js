@@ -2,7 +2,7 @@ const cards = document.querySelector(".cards")
 
 async function buscarPacks() {
     try {
-        const response = await fetch("http://localhost:3000/packs");
+        const response = await fetch("https://whammerstickers.onrender.com/packs");
 
         if (!response.ok) {
             throw new Error("Erro ao buscar os packs");
