@@ -5,6 +5,25 @@ const packContent = document.querySelector(".packContent");
 const stickerContent = document.querySelector(".stickerContent");
 const cancelPack = document.querySelector(".cancelPack");
 
+const params = new URLSearchParams(window.location.search)
+if(params.get("criarPack")==="true"){
+  botoes.classList.add("hidden")
+  packContent.classList.add("show")
+}
+
+const criarStickerUrl = params.get("criarSticker")
+const packUrl = params.get("pack")
+
+if (params.get("criarPack") === "true") {
+  botoes.classList.add("hidden")
+  packContent.classList.add("show")
+}
+
+if (criarStickerUrl === "true") {
+  botoes.classList.add("hidden")
+  stickerContent.classList.add("show")
+}
+
 // funcoes dos botoes criar packs e stickers
 criarPack.addEventListener("click", ()=>{
   botoes.classList.add("hidden")

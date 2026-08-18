@@ -1,5 +1,12 @@
 const cards = document.querySelector(".cards")
 
+const totalPacks = document.querySelector(".totalPacks")
+const adicionarPacks = document.querySelector(".add")
+
+adicionarPacks.addEventListener("click",()=>{
+  window.location.href = "../../index.html?criarPack=true"
+})
+
 async function buscarPacks() {
     try {
         const response = await fetch("https://whammerstickers.onrender.com/packs");
@@ -11,6 +18,8 @@ async function buscarPacks() {
         const packs = await response.json();
 
         console.log(packs);
+
+        totalPacks.textContent = `${packs.length} packs`
 
         packs.forEach(pack =>{
           const titulo = document.createElement("h5")
@@ -40,5 +49,27 @@ async function buscarPacks() {
         console.error(error);
     }
 }
+const back = document.querySelector(".voltar").addEventListener("click",()=>{
+  history.back()
+})
+
+const search = document.querySelector(".search")
+const menu = document.querySelector(".menu")
+const modal = document.querySelector(".modal")
+const dropdown = document.querySelector(".dropdown")
+
+menu.addEventListener("click", ()=>{
+  dropdown.classList.toggle("ativo")
+  modal.classList.toggle("ativo")
+})
+ modal.addEventListener("click",()=>{
+   dropdown.classList.remove("ativo")
+   search.style.display = "none"
+   modal.classList.remove("ativo")
+ })
+const iconSearch = document.querySelector(".icon").addEventListener("click",()=>{
+  search.style.display = "flex"
+  modal.classList.toggle("ativo")
+})
 
 document.addEventListener("DOMContentLoaded", buscarPacks);

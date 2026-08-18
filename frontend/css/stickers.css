@@ -218,6 +218,20 @@ span{
 .modal.ativo{
   display: block;
 }
+.add{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  border-radius:10px;
+  background: rgb(34,127,94);
+  margin: 2em;
+  font-weight: 700;
+  z-index: 99;
+  font-size: 22px;
+  width: 50px;
+  text-align: center;
+}
 @media (max-width:600px){
     .cards{
         grid-template-columns: repeat(3,1fr);

@@ -4,6 +4,10 @@ const packId = params.get("id");
 
 console.log(packId);
 
+const addStiker = document.querySelector(".add").addEventListener("click",()=>{
+  window.location.href = `../../index.html?criarSticker=true&pack=${packId}`
+})
+
 let packAtual = null
 
 const carregarPack = async()=>{
