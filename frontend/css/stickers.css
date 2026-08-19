@@ -232,6 +232,40 @@ span{
   width: 50px;
   text-align: center;
 }
+.imageViews{
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgb(0,0,0,.9);
+
+  display:none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.imageViews.ativo{
+  display: flex;
+}
+.imagemViews{
+  max-width: 95%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 15px;
+}
+.fecharViews{
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  width: 40px;
+  height: 40px;
+  line-height: 1;
+  border: none;
+  border-radius: 50%;
+  background: rgb(255,255,255,.15);
+  color: #fff;
+  font-size: 28px;
+  text-align: center;
+}
 @media (max-width:600px){
     .cards{
         grid-template-columns: repeat(3,1fr);

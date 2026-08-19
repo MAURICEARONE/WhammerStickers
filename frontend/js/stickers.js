@@ -8,6 +8,10 @@ const addStiker = document.querySelector(".add").addEventListener("click",()=>{
   window.location.href = `../../index.html?criarSticker=true&pack=${packId}`
 })
 
+const imageViewer = document.querySelector(".imageViews");
+const imagemViewer = document.querySelector(".imagemViews");
+const fecharViewer = document.querySelector(".fecharViews");
+
 let packAtual = null
 
 const carregarPack = async()=>{
@@ -30,6 +34,13 @@ const carregarPack = async()=>{
   }
 }
 
+const abrirImage = (sticker)=>{
+   imagemViewer.src = sticker.image
+   imagemViewer.alt = sticker.name
+
+   imageViewer.classList.add("ativo")
+}
+
 const mostrarSticker = (stickers)=>{
   const conteiner = document.querySelector(".cards")
   stickers.forEach(sticker =>{
@@ -38,6 +49,11 @@ const mostrarSticker = (stickers)=>{
     const img = document.createElement("img")
     img.src = sticker.image
     img.alt = sticker.name
+
+    img.addEventListener("click",()=>{
+      // abrir image em tela cheia.
+      abrirImage(sticker)
+    })
 
     card.appendChild(img)
     conteiner.appendChild(card)
@@ -76,4 +92,16 @@ const iconSearch = document.querySelector(".icon").addEventListener("click",()=>
   search.style.display = "flex"
   modal.classList.toggle("ativo")
 })
+const fecharImage = ()=>{
+  imageViewer.classList.remove("ativo")
+  imagemViewer.src = "";
+}
+fecharViewer.addEventListener("click",()=>{
+      fecharImage()
+    })
+imageViewer.addEventListener("click", (event)=>{
+  if(event.target === imageViewer){
+    fecharImage();
+  }
+});
 carregarPack()
