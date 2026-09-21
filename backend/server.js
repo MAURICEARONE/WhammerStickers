@@ -1,38 +1,38 @@
 const express = require("express");
 const cors = require("cors");
-const db = require("./database/database.js")
+const db = require("./database/db-pg.js")
 const app = express();
 
 app.use(express.json({limit: "10mb"}));
 app.use(cors());
 
-app.post("/packs" , (req , res)=>{
+app.post("/packs" , async (req , res)=>{
   // toda rota de packs ficarao aqui.
   const {name} = req.body || {}
   if(!name){
     return res.status(400).json({error:"Nome do pack obrigatorio."})
   }
 
-  const pack = db.createPack(name);
+  const pack = await db.createPack(name);
 
   res.json(pack)
   console.log(`Pack criado em ${db} pack ${pack}`)
 })
 
-app.post("/stickers" , (req , res)=>{
+app.post("/stickers" , async(req , res)=>{
   // rota para stickers.
   const {name , pack , image} = req.body || {}
   if (!name || !pack || !image) {
      return res.status(400).json({ error: "Campos obrigatórios em falta." });
   }
 
-  const sticker = db.createSticker(name,pack,image)
+  const sticker = await db.createSticker(name,pack,image)
 
   res.json(sticker)
 })
 
-app.get("/packs", (req , res)=>{
-  const packs = db.getPacks()
+app.get("/packs", async(req , res)=>{
+  const packs = await db.getPacks()
   res.json(packs)
 })
 app.get("/packs/search", (req, res) => {

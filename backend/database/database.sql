@@ -1,0 +1,13 @@
+CREATE TABLE packs(
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+
+CREATE TABLE stickers(
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  image TEXT NOT NULL,
+  pack_id BIGINT NOT NULL ,
+  FOREIGN KEY(pack_id) REFERENCES packs(id)
+);
+
