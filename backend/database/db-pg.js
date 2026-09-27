@@ -29,7 +29,17 @@ const getPacks = async()=>{
     `SELECT 
      packs.id,
      packs.name,
-     COUNT(stickers.id) AS quantidade
+     COUNT(stickers.id) AS quantidade,
+     COALESCE(
+       json_agg(
+         json_build_object(
+           'id', stickers.id,
+           'name', stickers.name,
+           'image', stickers.image
+         )
+       ) FILTER (WHERE stickers.id IS NOT NULL),
+       '[]'
+     ) AS stickers
      FROM packs
      LEFT JOIN stickers
      ON stickers.pack_id = packs.id
