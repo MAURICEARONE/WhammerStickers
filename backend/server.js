@@ -42,9 +42,9 @@ app.get("/packs/search", (req, res) => {
 
   res.json(packs);
 });
-app.get("/packs/:id", (req , res)=>{
+app.get("/packs/:id", async(req , res)=>{
   const id = req.params.id
-  const pack = db.getPackById(id)
+  const pack = await db.getPackById(id)
   if(!pack){
     return res.status(404).json({
       error:"pack nao encontrado"

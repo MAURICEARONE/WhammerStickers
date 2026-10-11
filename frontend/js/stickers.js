@@ -22,6 +22,8 @@ const carregarPack = async()=>{
     }
     const pack = await response.json()
 
+    console.log(pack)
+
     packAtual = pack
 
     const packName = document.querySelector(".nome")

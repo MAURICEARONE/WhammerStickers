@@ -68,9 +68,37 @@ const createSticker = async(name,pack,image)=>{
   )
   return result.rows[0]
 }
+
+const getPackById = async(id)=>{
+  const result = await pool.query(
+    `
+    SELECT(
+     packs.name,
+     packs.id,
+     COUNT(stickers.id):: AS quantidade,
+     COALESCE(
+     json_agg,
+     json_build_object(
+     'id', stickers.id,
+     'name', stickers.name,
+     'image', stickers.image
+     )
+     ) FILTER(WHERE stickers.id IS NOT NULL)
+      '[]'::json
+    ) AS stickers FROM packs
+      LEFT JOIN sticker
+      ON sticker.pack_id = packs.id
+      WHERE packs.id = $1
+      GROUP BY packs.id , packs.name,
+    `
+    [id]
+  )
+  return result.rows[0] || NULL
+}
 module.exports = {
   createPack,
   getPacks,
-  createSticker
+  createSticker,
+  getPackById
   
 }
