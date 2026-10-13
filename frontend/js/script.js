@@ -68,43 +68,99 @@ file.addEventListener("change", (event)=>{
 const packBtn = document.querySelector(".createPack")
 const packName = document.querySelector(".packName")
 
-packBtn.addEventListener("click", async()=>{
-  const name = packName.value.trim()
-  if(!name){
-     alert("degite o nome do pack") 
-     return
-  }
-  try {
-    const response = await fetch("https://whammerstickers.onrender.com/packs",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      } ,
-      body: JSON.stringify({
-        name: name
-      })
-    })
-    const data = await response.json()
-    if(!response.ok){
-      alert(data.error)
-      return
-    }
-    alert("pack criado com sucesso")
-    console.log(data)
-    packName.value = ""
 
-    packContent.classList.remove("show")
-    botoes.classList.remove("hidden")
-  } catch (error) {
-    console.error(error)
-    alert("Erro ao conectar com servidor")
+const statusModal = document.querySelector("#statusModal");
+const statusSpinner = document.querySelector("#statusSpinner");
+const statusTitle = document.querySelector("#statusTitle");
+const statusMessage = document.querySelector("#statusMessage");
+const statusClose = document.querySelector("#statusClose");
+
+function mostrarModal(titulo, mensagem, estado) {
+  statusModal.hidden = false;
+
+  statusTitle.textContent = titulo;
+  statusMessage.textContent = mensagem;
+
+  statusSpinner.hidden = estado !== "loading";
+  statusClose.hidden = estado === "loading";
+}
+
+statusClose.addEventListener("click", () => {
+  statusModal.hidden = true;
+});
+
+  packBtn.addEventListener("click", async () => {
+  const name = packName.value.trim();
+
+  if (!name) {
+    alert("Digite o nome do pack.");
+    return;
   }
-})
+
+  if (packBtn.disabled) return;
+
+  packBtn.disabled = true;
+
+  mostrarModal(
+    "A criar pack...",
+    "Guardar o seu pack, por favor aguarde.",
+    "loading"
+  );
+
+  try {
+    const response = await fetch(
+      "https://whammerstickers.onrender.com/packs",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      mostrarModal(
+        "Não foi possível criar o pack",
+        data.error || "O servidor recusou a criação do pack.",
+        "error"
+      );
+      return;
+    }
+
+    console.log("Pack criado:", data);
+
+    packName.value = "";
+    packContent.classList.remove("show");
+    botoes.classList.remove("hidden");
+
+    mostrarModal(
+      "Pack criado com sucesso!",
+      "O pack foi guardado com sucesso.",
+      "success"
+    );
+
+  } catch (error) {
+    console.error("Erro ao criar pack:", error);
+
+    mostrarModal(
+      "Erro de conexão",
+      "Não foi possível contactar o servidor.",
+      "error"
+    );
+
+  } finally {
+    packBtn.disabled = false;
+  }
+});
+
 const stickName = document.querySelector(".stickName")
 const packId = document.querySelector(".packId")
 const saveBtn = document.querySelector(".saveBtn")
 
-saveBtn.addEventListener("click", async ()=>{
+async function guardarSticker(){
   const name = stickName.value.trim()
   const pack = packId.value.trim()
   const image = canvas.toDataURL("image/png")
@@ -113,6 +169,15 @@ saveBtn.addEventListener("click", async ()=>{
     alert("Preencha todos campos")
     return
   }
+   if(saveBtn.disabled) return
+
+   saveBtn.disabled = true
+
+   mostrarModal(
+     "A criar sticker...",
+     "A Guardar seu sticker aguarde...",
+     "loading"
+   )
   try {
     const response = await fetch("https://whammerstickers.onrender.com/stickers",{
       method: "POST",
@@ -127,11 +192,21 @@ saveBtn.addEventListener("click", async ()=>{
     })
     const data = await response.json()
     if(!response.ok){
-      alert(data.error)
+      mostrarModal(
+        "Nao possivel criar",
+        data.error || "O servidor recusou a criação do sticker",
+        "error"
+      )
       return
     }
-    alert("Sticker criado com sucesso!")
+
     console.log(data)
+
+    mostrarModal(
+      "sticker criado...",
+      "sticker guardado com sucesso",
+      "success"
+    )
     stickName.value =""
     packId.value = ""
     file.value = ""
@@ -143,9 +218,17 @@ saveBtn.addEventListener("click", async ()=>{
     botoes.classList.remove("hidden")
   } catch (error) {
     console.error(error)
-    alert("Erro ao conectar com servidor!")
+    mostrarModal(
+      "Erro de conexão",
+      "Não foi possível contactar o servidor. Verifica a ligação.",
+      "error"
+      )
+  } finally{
+    saveBtn.disabled = false
   }
-})
+}
+
+saveBtn.addEventListener("click", guardarSticker)
 
 const acessarConteudo = document.querySelector(".verPacks").addEventListener("click",()=>{
   window.location.assign("./frontend/docs/packs.html")

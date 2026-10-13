@@ -95,6 +95,17 @@ const getPackById = async(id)=>{
   )
   return result.rows[0] || null
 }
+
+const searchPacks = async(search)=>{
+  const result = await pool.query(
+   `SELECT id, name
+     FROM packs 
+     WHERE name ILIKE $1
+   ` ,
+    [`%${search}%`]
+  )
+  return result.rows
+}
 module.exports = {
   createPack,
   getPacks,

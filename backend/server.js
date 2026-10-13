@@ -35,10 +35,10 @@ app.get("/packs", async(req , res)=>{
   const packs = await db.getPacks()
   res.json(packs)
 })
-app.get("/packs/search", (req, res) => {
-  const search = req.query.search;
+app.get("/packs/search", async(req, res) => {
+  const search = req.query.search || "";
 
-  const packs = db.searchPacks(search);
+  const packs = await db.searchPacks(search);
 
   res.json(packs);
 });
